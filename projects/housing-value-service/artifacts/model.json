@@ -1,0 +1,238 @@
+{
+  "schema_version": 1,
+  "model_version": "24a9c8e5b5fc",
+  "state_sha256": "24a9c8e5b5fc45981ec9f0d6ac9e7373b081b702588992df2e93d917505c1187",
+  "state": {
+    "preprocessing": {
+      "medians": [
+        -118.49,
+        34.25,
+        29.0,
+        2118.0,
+        435.5,
+        1174.0,
+        410.0,
+        3.5313
+      ],
+      "lower": [
+        -124.0317,
+        32.63,
+        3.0,
+        94.91499999999999,
+        20.0,
+        51.83,
+        17.0,
+        0.9335384999999999,
+        2.2922239612976667,
+        0.11698280883310413,
+        1.4403644021949147
+      ],
+      "upper": [
+        -115.57,
+        40.88,
+        52.0,
+        14945.359999999986,
+        2658.4649999999747,
+        7221.594999999994,
+        2440.084999999999,
+        12.098790999999943,
+        15.149035569693119,
+        0.5026928952134602,
+        6.269372559384738
+      ],
+      "means": [
+        -119.57349446059351,
+        35.630528908268865,
+        28.702438630490956,
+        2614.7674458979277,
+        533.1978221899221,
+        1420.0035812338515,
+        496.0552543604649,
+        3.8514641011789243,
+        5.359785088118835,
+        0.2136232687211051,
+        2.9330049562943374
+      ],
+      "scales": [
+        1.995714453722743,
+        2.122926280220529,
+        12.58490700140292,
+        2000.136764900284,
+        387.4495320426954,
+        1026.5010324270727,
+        353.49922944234515,
+        1.8440281743037126,
+        1.490765774577727,
+        0.05756947931505493,
+        0.7624681579501225
+      ],
+      "categories": [
+        "<1H OCEAN",
+        "INLAND",
+        "ISLAND",
+        "NEAR BAY",
+        "NEAR OCEAN"
+      ],
+      "feature_names": [
+        "longitude",
+        "latitude",
+        "housing_median_age",
+        "total_rooms",
+        "total_bedrooms",
+        "population",
+        "households",
+        "median_income",
+        "rooms_per_household",
+        "bedrooms_per_room",
+        "people_per_household",
+        "ocean_proximity=INLAND",
+        "ocean_proximity=ISLAND",
+        "ocean_proximity=NEAR BAY",
+        "ocean_proximity=NEAR OCEAN"
+      ],
+      "raw_ranges": {
+        "longitude": [
+          -124.35,
+          -114.47
+        ],
+        "latitude": [
+          32.55,
+          41.95
+        ],
+        "housing_median_age": [
+          1.0,
+          52.0
+        ],
+        "total_rooms": [
+          6.0,
+          32627.0
+        ],
+        "total_bedrooms": [
+          1.0,
+          6445.0
+        ],
+        "population": [
+          8.0,
+          35682.0
+        ],
+        "households": [
+          1.0,
+          6082.0
+        ],
+        "median_income": [
+          0.4999,
+          15.0001
+        ]
+      }
+    },
+    "weights": [
+      -0.593322361195414,
+      -0.6104348490075463,
+      0.13591944569889877,
+      -0.04688216982584233,
+      -0.048849910906518204,
+      -0.0978745072698096,
+      0.24627845216789326,
+      0.7640120620982369,
+      0.12140959071792866,
+      0.18929349683173355,
+      -0.20699787166234107,
+      -0.33837845821099,
+      0.04689345584896792,
+      -0.082571988712661,
+      0.0015549227465901673
+    ],
+    "bias": 2.183553739750874,
+    "data_sha256": "8a3727f4cf54ac1a327f69b1d5b4db54c5834ea81c6e4efc0d163300022a685e",
+    "training_config": {
+      "random_seed": 42,
+      "train_fraction": 0.6,
+      "validation_fraction": 0.2,
+      "learning_rate": 0.03,
+      "epochs": 2500,
+      "l2": 0.001,
+      "max_validation_rmse_ratio": 0.8,
+      "max_validation_mae_ratio": 0.9
+    }
+  },
+  "created_at": "2026-10-12T10:04:57.354607+00:00",
+  "source_sha256": "d9d15c81ac93a57a69da1f2258d9b72ab1f75e4d25434003faf3d4ff0b09e50a",
+  "target": {
+    "name": "median_house_value",
+    "unit": "USD",
+    "meaning": "District median house value in historical California census data"
+  },
+  "evaluation": {
+    "validation": {
+      "mean_baseline": {
+        "mae_usd": 91374.51061568409,
+        "rmse_usd": 115689.329760085,
+        "r2": -0.00023268712104851375
+      },
+      "scratch_ridge": {
+        "mae_usd": 48089.03890945052,
+        "rmse_usd": 65693.58858207168,
+        "r2": 0.6774772118302741
+      },
+      "sklearn_ridge": {
+        "mae_usd": 48094.18621884577,
+        "rmse_usd": 65680.40588032643,
+        "r2": 0.6776066398374431
+      }
+    },
+    "test": {
+      "mean_baseline": {
+        "mae_usd": 91442.41434688326,
+        "rmse_usd": 116028.0825419389,
+        "r2": -0.00011625768312906182
+      },
+      "scratch_ridge": {
+        "mae_usd": 47641.83209731863,
+        "rmse_usd": 65523.00350893048,
+        "r2": 0.6810578993246408
+      },
+      "sklearn_ridge": {
+        "mae_usd": 47646.45591859124,
+        "rmse_usd": 65518.493177560355,
+        "r2": 0.6811018071119377
+      }
+    },
+    "validation_gate": {
+      "rmse_beats_baseline": true,
+      "mae_beats_baseline": true,
+      "finite_metrics": true
+    },
+    "reference_mean_absolute_prediction_difference_usd": 437.8017307867227
+  },
+  "split_counts": {
+    "train": 12384,
+    "validation": 4128,
+    "test": 4128
+  },
+  "split_indices_sha256": {
+    "train": "41237a4fe97678f059cf5eb968bc8cf763d8a1096574b412e0d2bf860dc959e5",
+    "validation": "42625e93cd0de551d033955b6b929578a489149062b7994bd78a76132cee5d48",
+    "test": "71c350d82e79e24aa2774f6c6616f78d0b44682419d3959794576820c7131081"
+  },
+  "data_audit": {
+    "rows": 20640,
+    "missing": {
+      "longitude": 0,
+      "latitude": 0,
+      "housing_median_age": 0,
+      "total_rooms": 0,
+      "total_bedrooms": 207,
+      "population": 0,
+      "households": 0,
+      "median_income": 0,
+      "median_house_value": 0,
+      "ocean_proximity": 0
+    },
+    "duplicates": 0
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3"
+  }
+}

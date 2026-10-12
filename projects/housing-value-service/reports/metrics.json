@@ -1,0 +1,42 @@
+{
+  "validation": {
+    "mean_baseline": {
+      "mae_usd": 91374.51061568409,
+      "rmse_usd": 115689.329760085,
+      "r2": -0.00023268712104851375
+    },
+    "scratch_ridge": {
+      "mae_usd": 48089.03890945052,
+      "rmse_usd": 65693.58858207168,
+      "r2": 0.6774772118302741
+    },
+    "sklearn_ridge": {
+      "mae_usd": 48094.18621884577,
+      "rmse_usd": 65680.40588032643,
+      "r2": 0.6776066398374431
+    }
+  },
+  "test": {
+    "mean_baseline": {
+      "mae_usd": 91442.41434688326,
+      "rmse_usd": 116028.0825419389,
+      "r2": -0.00011625768312906182
+    },
+    "scratch_ridge": {
+      "mae_usd": 47641.83209731863,
+      "rmse_usd": 65523.00350893048,
+      "r2": 0.6810578993246408
+    },
+    "sklearn_ridge": {
+      "mae_usd": 47646.45591859124,
+      "rmse_usd": 65518.493177560355,
+      "r2": 0.6811018071119377
+    }
+  },
+  "validation_gate": {
+    "rmse_beats_baseline": true,
+    "mae_beats_baseline": true,
+    "finite_metrics": true
+  },
+  "reference_mean_absolute_prediction_difference_usd": 437.8017307867227
+}
