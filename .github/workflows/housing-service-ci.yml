@@ -1,0 +1,58 @@
+name: Housing service CI
+on:
+  push:
+    branches: [main, 'feature/housing-value-service-*']
+    paths: ['projects/housing-value-service/**', '.github/workflows/housing-service-ci.yml']
+  pull_request:
+    paths: ['projects/housing-value-service/**', '.github/workflows/housing-service-ci.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    defaults:
+      run:
+        working-directory: projects/housing-value-service
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: projects/housing-value-service/requirements*.txt
+      - name: Install frozen dependencies
+        run: python -m pip install -r requirements-dev.txt
+      - name: Train and enforce the validation gate
+        run: python -m housing.training --output /tmp/housing-training-candidate
+      - name: Test mathematics, preprocessing and API behavior
+        run: python -m pytest
+      - name: Build the Docker image
+        run: docker build -t housing-value-lab:test .
+      - name: Run the image and verify readiness and prediction
+        run: |
+          docker run -d --name housing-test -p 8000:8000 housing-value-lab:test
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:8000/ready; then break; fi
+            sleep 2
+          done
+          python scripts/smoke.py
+      - name: Verify the browser demo at desktop and mobile widths
+        run: |
+          npm install --prefix /tmp/housing-browser-tests --no-audit --no-fund playwright@1.62.1
+          NODE_PATH=/tmp/housing-browser-tests/node_modules node scripts/browser-smoke.cjs
+      - name: Inspect container logs
+        if: always()
+        run: docker logs housing-test || true
+      - name: Keep evaluation evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: housing-release-evidence
+          path: |
+            projects/housing-value-service/reports/metrics.json
+            projects/housing-value-service/artifacts/model.json
+            projects/housing-value-service/reports/demo-*.png

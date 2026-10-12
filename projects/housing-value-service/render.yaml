@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: housing-value-lab
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./projects/housing-value-service/Dockerfile
+    dockerContext: ./projects/housing-value-service
+    healthCheckPath: /ready
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: PORT
+        value: "10000"

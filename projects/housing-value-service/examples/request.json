@@ -1,0 +1,15 @@
+{
+  "records": [
+    {
+      "longitude": -118.02,
+      "latitude": 33.81,
+      "housing_median_age": 34.0,
+      "total_rooms": 3482.0,
+      "total_bedrooms": 614.0,
+      "population": 2227.0,
+      "households": 641.0,
+      "median_income": 5.1155,
+      "ocean_proximity": "<1H OCEAN"
+    }
+  ]
+}
