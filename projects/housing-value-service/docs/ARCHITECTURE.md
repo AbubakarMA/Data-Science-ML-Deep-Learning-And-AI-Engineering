@@ -54,6 +54,12 @@ Each release records parameters, preprocessing, training configuration, dataset
 checksum, source checksum, split checksums, runtime versions, audit and evaluation.
 There is no pickle execution or library-specific estimator object in serving.
 
+Floating-point training can differ at the last decimal places across hardware,
+even with the same seed and dependency versions. This can produce a different
+content hash without a meaningful prediction change. CI trains into a separate
+candidate directory and builds its container from the reviewed, checked-in
+artifact. The HTTP smoke test checks the exact expected model version.
+
 ## Operations scope
 
 One process loads one model. Metrics are process-local and reset when it restarts;

@@ -7,7 +7,8 @@
 - Trained the NumPy model and passed the fixed validation gate before final test reporting.
 - Repeated training in a clean environment using pinned dependencies; reproduced
   model version `24a9c8e5b5fc` and the recorded evaluation results.
-- Passed 27 tests in both the initial and clean environments. The tests cover
+- Passed 27 initial tests in both the initial and clean environments, then added
+  a source-provenance check for 28 total tests. The tests cover
   numerical gradients, an independent closed-form optimizer comparison,
   training-only preprocessing, artifacts, splits, API behavior and drift.
 - Started the actual HTTP server and passed readiness and prediction smoke checks.
@@ -23,6 +24,15 @@ The GitHub workflow runs Docker build, an HTTP smoke test inside the image and
 a real browser interaction at desktop and mobile widths. It keeps screenshots,
 the model artifact and evaluation report as evidence. Inspect the workflow result
 before accepting the container release.
+
+The first full CI run passed all stages:
+https://github.com/AbubakarMA/Data-Science-ML-Deep-Learning-And-AI-Engineering/actions/runs/38234436489
+
+That run demonstrated a cross-hardware content-hash difference after retraining.
+The updated workflow keeps the reviewed artifact unchanged, trains a separate
+candidate, and checks the exact served version. Its final CI result is recorded
+in the pull request. Browser screenshots from the initial run were also visually
+reviewed at desktop and mobile widths.
 
 Live deployment requires a confirmed Render workspace. After creation, verify
 the actual URL with readiness and a prediction; a configured deployment is not

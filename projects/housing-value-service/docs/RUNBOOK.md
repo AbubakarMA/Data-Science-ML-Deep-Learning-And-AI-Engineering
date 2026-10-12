@@ -41,6 +41,8 @@ development loop, obtain a new final evaluation dataset before making new claims
 
 For local serving, stop the process and set `MODEL_PATH` to an earlier retained
 `artifacts/releases/<version>/model.json`, then restart and smoke-test it.
+Pass `--expected-version <version>` to the smoke script when deliberately checking
+a retained release instead of the active artifact.
 
 On Render, deploy the earlier known-good source commit/image and repeat the
 readiness and prediction checks. Keep the artifact and its matching preprocessing

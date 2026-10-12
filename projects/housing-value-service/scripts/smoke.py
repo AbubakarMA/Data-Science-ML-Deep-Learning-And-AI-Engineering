@@ -9,11 +9,13 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def smoke(base_url, api_key=None):
+def smoke(base_url, api_key=None, expected_version=None):
     url = base_url.rstrip('/')
     with urlopen(url + '/ready', timeout=10) as response:
         assert response.status == 200
         ready = json.load(response)
+    expected_version = expected_version or json.loads((ROOT / 'artifacts/model.json').read_text())['model_version']
+    assert ready['model_version'] == expected_version, 'The server is not serving the expected release'
     body = (ROOT / 'examples/request.json').read_bytes()
     headers = {'Content-Type': 'application/json'}
     if api_key:
@@ -35,5 +37,6 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('base_url', nargs='?', default='http://127.0.0.1:8000')
     parser.add_argument('--api-key')
+    parser.add_argument('--expected-version')
     args = parser.parse_args()
-    smoke(args.base_url, args.api_key)
+    smoke(args.base_url, args.api_key, args.expected_version)

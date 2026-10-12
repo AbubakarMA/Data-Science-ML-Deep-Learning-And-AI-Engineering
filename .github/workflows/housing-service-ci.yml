@@ -28,7 +28,7 @@ jobs:
       - name: Install frozen dependencies
         run: python -m pip install -r requirements-dev.txt
       - name: Train and enforce the validation gate
-        run: python -m housing.training
+        run: python -m housing.training --output /tmp/housing-training-candidate
       - name: Test mathematics, preprocessing and API behavior
         run: python -m pytest
       - name: Build the Docker image

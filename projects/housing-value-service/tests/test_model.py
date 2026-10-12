@@ -1,5 +1,6 @@
 import copy
 import json
+import hashlib
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -79,6 +80,13 @@ def test_released_model_passed_quality_gate():
     assert all(payload['evaluation']['validation_gate'].values())
     val = payload['evaluation']['validation']
     assert val['scratch_ridge']['rmse_usd'] < val['mean_baseline']['rmse_usd'] * .8
+
+
+def test_released_artifact_matches_training_source():
+    payload = json.loads((ROOT / 'artifacts/model.json').read_text())
+    names = ['preprocessing.py', 'scratch.py', 'training.py', 'artifact.py']
+    digest = hashlib.sha256(b''.join((ROOT / 'housing' / name).read_bytes() for name in names)).hexdigest()
+    assert payload['source_sha256'] == digest
 
 
 def test_invalid_training_data_rejected():
